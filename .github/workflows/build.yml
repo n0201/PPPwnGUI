@@ -1,6 +1,3 @@
-To make your GitHub Actions workflow pick up and use the headers and the new folder structure, you need to adjust the build steps accordingly. Here's how you can modify your workflow file:
-
-```yaml
 name: Build Binaries and Create Release
 
 on:
@@ -54,9 +51,3 @@ jobs:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           files: ./dist/*.zip
           prerelease: false
-```
-
-In the modified workflow:
-
-- In the "Build firmware for each version" step, the paths to the stage1 and stage2 folders are updated to `pppwn/stage1` and `pppwn/stage2`, respectively.
-- This ensures that the compilation commands correctly reference the new folder structure where the headers and source files are located.
