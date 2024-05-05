@@ -15,6 +15,8 @@ The exploit only prints `PPPwned` on your PS4 as a proof-of-concept. In order to
 - A computer with an Ethernet port
   - USB adapter also works
 - Ethernet cable
+- Npcap
+  - get it [here](https://npcap.com/dist/npcap-1.79.exe)
 
 
 ## Usage
