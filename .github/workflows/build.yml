@@ -1,3 +1,6 @@
+To make your GitHub Actions workflow pick up and use the headers and the new folder structure, you need to adjust the build steps accordingly. Here's how you can modify your workflow file:
+
+```yaml
 name: Build Binaries and Create Release
 
 on:
@@ -22,10 +25,7 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y build-essential gcc-multilib zip
       
       - name: Create dist directory
-        run: mkdir pppwn/dist
-
-      - name: Cd to ppwn
-        run: cd ppwn
+        run: mkdir dist
 
       - name: Set outputs
         id: vars
@@ -35,9 +35,9 @@ jobs:
         run: |
           for FW_VERSION in 900 903 904 950 960 1000 1001 1050 1070 1071 1100; do
             make FW=$FW_VERSION clean && make FW=$FW_VERSION all
-            make -C stage1 FW=$FW_VERSION clean && make -C stage1 FW=$FW_VERSION
-            make -C stage2 FW=$FW_VERSION clean && make -C stage2 FW=$FW_VERSION
-            zip -r "dist/stages-$FW_VERSION.zip" stage1/stage1_$FW_VERSION.bin stage2/stage2_$FW_VERSION.bin
+            make -C pppwn/stage1 FW=$FW_VERSION clean && make -C pppwn/stage1 FW=$FW_VERSION
+            make -C pppwn/stage2 FW=$FW_VERSION clean && make -C pppwn/stage2 FW=$FW_VERSION
+            zip -r "dist/stages-$FW_VERSION.zip" pppwn/stage1/stage1_$FW_VERSION.bin pppwn/stage2/stage2_$FW_VERSION.bin
           done
 
       - name: Archive prebuilt binaries
@@ -54,3 +54,9 @@ jobs:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
           files: ./dist/*.zip
           prerelease: false
+```
+
+In the modified workflow:
+
+- In the "Build firmware for each version" step, the paths to the stage1 and stage2 folders are updated to `pppwn/stage1` and `pppwn/stage2`, respectively.
+- This ensures that the compilation commands correctly reference the new folder structure where the headers and source files are located.
