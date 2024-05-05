@@ -13,8 +13,9 @@ class App(tk.CTk):
         global stage2_selected
 
         self.title("PPPwn GUI - n0201")
-        self.geometry("350x350")
-
+        self.geometry("350x400")
+        self.resizable(width=False, height=False)
+        
         self.grid_rowconfigure(0, weight=0)
         self.grid_columnconfigure((0, 1), weight=1)
 
@@ -36,8 +37,9 @@ class App(tk.CTk):
         interfaces = psutil.net_if_addrs().keys()
         output_list = list(interfaces)
 
-        self.placeholder_label = tk.CTkLabel(self, text="")
-        self.placeholder_label.grid(row=1, column=1, padx=20, pady=20, sticky="ew")
+        self.log = tk.CTkTextbox(self)
+        self.log.configure(state="disabled")
+        self.log.grid(row=1, column=0, padx=5, pady=5, sticky="ew", columnspan=2)
 
         self.optionmenu_1 = tk.CTkOptionMenu(self, dynamic_resizing=True,
                                                         values=output_list)
@@ -50,13 +52,10 @@ class App(tk.CTk):
         self.optionmenu_2.grid(row=2, column=1, padx=20, pady=20, sticky="ew")
 
         def exploit_window():
+            self.log.configure(state="normal")
+            self.log.insert(tk.END, "UI was made with ❤ from n0201 on git\n\n")
             p = subprocess.Popen("python pppwn\pppwn.py --interface=\""+self.optionmenu_1.get()+"\" --fw="+self.optionmenu_2.get()+" --stage2=\""+self.label_file.get()+"\" --stage1=pppwn\stage1\stage1_"+self.optionmenu_2.get()+".bin", stdout=subprocess.PIPE, shell=True, universal_newlines=True, encoding="utf-8")
 
-            out_window = tk.CTkToplevel(self)
-            out_window.title("Jailbreak output")
-            out_window.geometry("450x350")
-            textbox = tk.CTkTextbox(out_window)
-            textbox.pack(padx=10, pady=10, fill=tk.BOTH, expand=True)
             while True:
                 realtime_output = p.stdout.readline()
 
@@ -64,24 +63,22 @@ class App(tk.CTk):
                     break
 
                 if realtime_output:
-                    textbox.insert(tk.END, realtime_output)
+                    self.log.insert(tk.END, realtime_output)
                     self.update()
 
 
         def run_exploit():
-            if stage2_selected == True:
+            if stage2_selected == True and self.label_file.get() != "":
                 threading.Thread(exploit_window()).start()
             else:
-                error_window = tk.CTkToplevel(self)
-                error_window.title("ERROR")
-                error_window.geometry("350x100")
-                tk.CTkLabel(error_window, text ="Did you choose the \"stage2.bin\" file?").pack()
+                self.label_file.configure(state="normal")
+                self.label_file.delete(0, tk.END)
+                self.label_file.insert(0, "pppwn/stage2/stage2_"+self.optionmenu_2.get()+".bin")
+                threading.Thread(exploit_window()).start()
+
 
         self.exploit_button = tk.CTkButton(self, text="Run exploit", command=run_exploit)
         self.exploit_button.grid(row=3, column=0, padx=20, pady=20, sticky="ew", columnspan=2)
-
-        self.credits_label = tk.CTkLabel(self, text="UI was made with ❤ from n0201 on git")
-        self.credits_label.grid(row=4, column=0, padx=20, pady=20, sticky="ew", columnspan=2)
 
 if __name__ == "__main__":
     app = App()
