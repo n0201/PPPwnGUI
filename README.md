@@ -19,16 +19,9 @@ The exploit only prints `PPPwned` on your PS4 as a proof-of-concept. In order to
 
 ## Usage
 
-Download the latest release
+- Download the latest release
 
-Install the requirements:
-
-```sh
-sudo pip install -r requirements.txt
-```
-
-Run the exploit on windows:
-
+- Run the exploit on windows:
 ```sh
 python main.py
 ```

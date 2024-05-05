@@ -1,8 +1,14 @@
+import os
+
+try:
+    os.system("requirements.bat")
+except:
+    pass
+
 import customtkinter as tk
 import psutil
 import subprocess
 import threading
-import os
 
 stage2_selected = False
 
