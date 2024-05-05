@@ -3,10 +3,6 @@ PPPwn is a kernel remote code execution exploit for PlayStation 4 up to FW 11.00
 
 Supported versions are:
 - FW 9.00
-- FW 9.03 / 9.04
-- FW 9.50 / 9.60
-- FW 10.00 / 10.01
-- FW 10.50 / 10.70 / 10.71
 - FW 11.00
 - more can be added (PRs are welcome)
 
@@ -16,23 +12,11 @@ The exploit only prints `PPPwned` on your PS4 as a proof-of-concept. In order to
 - A computer with an Ethernet port
   - USB adapter also works
 - Ethernet cable
-- Linux
-  - You can use VirtualBox to create a Linux VM with `Bridged Adapter` as network adapter to use the ethernet port in the VM.
-- Python3 and gcc installed
+
 
 ## Usage
 
-On your computer, clone the repository:
-
-```sh
-git clone --recursive https://github.com/TheOfficialFloW/PPPwn
-```
-
-Change the directory to the cloned repository:
-
-```sh
-cd PPPwn
-```
+Download the latest release
 
 Install the requirements:
 
@@ -40,22 +24,21 @@ Install the requirements:
 sudo pip install -r requirements.txt
 ```
 
-Compile the payloads:
+Run the exploit on windows:
 
 ```sh
-make -C stage1 FW=1100 clean && make -C stage1 FW=1100
-make -C stage2 FW=1100 clean && make -C stage2 FW=1100
+python main.py
 ```
 
-For other firmwares, e.g. FW 9.00, pass `FW=900`.
+choose a stage2.bin (custom ones from e.g. @LightningMods work too!)
+Note: the stage files are all located in pppwn/stage1 & pppwn/stage2
 
-Run the exploit (see `ifconfig` for the correct interface):
+## screenshots
+![image](https://github.com/n0201/PPPwnGUI/assets/87095139/80a6d740-3bfa-4700-b538-dfac774894c3)
+![image](https://github.com/n0201/PPPwnGUI/assets/87095139/d76c7882-7390-4d14-b5af-17cad7127b37)
 
-```sh
-sudo python3 pppwn.py --interface=enp0s3 --fw=1100
-```
-
-For other firmwares, e.g. FW 9.00, pass `--fw=900`.
+## Note
+- If there's no new output (e.g. the pppwn.py script is stuck at "Waiting for PADI", the GUI will freeze until a new output will be send)
 
 On your PS4:
 
