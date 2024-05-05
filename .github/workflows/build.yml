@@ -34,8 +34,12 @@ jobs:
             make FW=$FW_VERSION clean && make FW=$FW_VERSION all
             make -C pppwn/stage1 FW=$FW_VERSION clean && make -C pppwn/stage1 FW=$FW_VERSION
             make -C pppwn/stage2 FW=$FW_VERSION clean && make -C pppwn/stage2 FW=$FW_VERSION
-            zip -r "dist/stages-$FW_VERSION.zip" pppwn/stage1/stage1_$FW_VERSION.bin pppwn/stage2/stage2_$FW_VERSION.bin
           done
+      
+      - name: create zip
+        run: |
+          rsync -av --progress * dist/ --exclude dist
+          zip -r "dist/release.zip" dist/*
 
       - name: Archive prebuilt binaries
         uses: actions/upload-artifact@v2
