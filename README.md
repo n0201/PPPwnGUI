@@ -34,8 +34,8 @@ choose a stage2.bin (custom ones from e.g. @LightningMods work too!)
 Note: the stage files are all located in pppwn/stage1 & pppwn/stage2
 
 ## screenshots
-![image](https://github.com/n0201/PPPwnGUI/assets/87095139/80a6d740-3bfa-4700-b538-dfac774894c3)
-![image](https://github.com/n0201/PPPwnGUI/assets/87095139/d76c7882-7390-4d14-b5af-17cad7127b37)
+![image](https://github.com/n0201/PPPwnGUI/assets/87095139/c7692d58-5a62-48c9-b992-495bd979c7cb)
+
 
 ## Note
 - If there's no new output (e.g. the pppwn.py script is stuck at "Waiting for PADI", the GUI will freeze until a new output will be send)
