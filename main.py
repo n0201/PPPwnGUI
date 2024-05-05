@@ -45,12 +45,12 @@ class App(tk.CTk):
         self.optionmenu_1.grid(row=2, column=0, padx=20, pady=20, sticky="ew")
 
         self.optionmenu_2 = tk.CTkOptionMenu(self, dynamic_resizing=True,
-                                                        values=["1100", "9000"])
+                                                        values=["900", "950", "1000", "1050", "1100"])
         self.optionmenu_2.set("choose firmware")
         self.optionmenu_2.grid(row=2, column=1, padx=20, pady=20, sticky="ew")
 
         def exploit_window():
-            p = subprocess.Popen("python pppwn\pppwn.py --interface=\""+self.optionmenu_1.get()+"\" --fw="+self.optionmenu_2.get()+" --stage2=\""+self.label_file.get()+"\" --stage1=pppwn\stage1\stage1.bin", stdout=subprocess.PIPE, shell=True, universal_newlines=True, encoding="utf-8")
+            p = subprocess.Popen("python pppwn\pppwn.py --interface=\""+self.optionmenu_1.get()+"\" --fw="+self.optionmenu_2.get()+" --stage2=\""+self.label_file.get()+"\" --stage1=pppwn\stage1\stage1_"+self.optionmenu_2.get()+".bin", stdout=subprocess.PIPE, shell=True, universal_newlines=True, encoding="utf-8")
 
             out_window = tk.CTkToplevel(self)
             out_window.title("Jailbreak output")
