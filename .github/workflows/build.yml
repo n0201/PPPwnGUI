@@ -36,7 +36,11 @@ jobs:
             make -C pppwn/stage2 FW=$FW_VERSION clean && make -C pppwn/stage2 FW=$FW_VERSION
           done
       
-      - name: create zip
+      - name: Add version file
+        run: echo "${{ steps.vars.outputs.sha_short }}" > version.txt
+
+
+      - name: Create zip
         run: |
           rsync -av --progress * dist/ --exclude dist
           zip -r "dist/release.zip" dist/*

@@ -9,6 +9,21 @@ import customtkinter as tk
 import psutil
 import subprocess
 import threading
+import requests
+from winotify import Notification
+
+with open("version.txt", "r") as file:
+    content = file.read()
+    response = requests.get("https://api.github.com/repos/n0201/PPPwnGUI/releases/latest")
+    version = response.json()["name"]
+    print(version)
+    if version != "PPPwn "+content:
+        toast = Notification(app_id="PPPwnGUI",
+                     title="A new version was released!",
+                     msg=f"Version \"{version}\" is out now")
+        toast.add_actions(label="Get it here", 
+                  launch="https://github.com/n0201/PPPwnGUI/releases/latest")
+        toast.show()
 
 stage2_selected = False
 

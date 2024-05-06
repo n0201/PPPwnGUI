@@ -41,6 +41,15 @@ Note: the stage files are all located in pppwn/stage1 & pppwn/stage2
 ## Note
 - If there's no new output (e.g. the pppwn.py script is stuck at "Waiting for PADI", the GUI will freeze until a new output will be send)
 
+- ### DO NOT CLICK THE EXPLOIT BUTTON JUST YET
+
+- Now, simultaneously press the 'X' button on your controller on `Test Internet Connection` and the exploit button in the UI
+
+If the exploit fails or the PS4 crashes, you can skip the internet setup and simply click on `Test Internet Connection`. Kill the `main.py` script and run it again on your computer, and then click on `Test Internet Connection` on your PS4: always simultaneously. (Note: The command prompt of the UI also runs the `pppwn.py` script, so it is enough to just close that console)
+
+
+If the exploit works, you should see an output similar to below, and you should see `Cannot connect to network.` followed by `PPPwned` printed on your PS4, or the other way around. 
+
 On your PS4:
 
 - Go to `Settings` and then `Network`
