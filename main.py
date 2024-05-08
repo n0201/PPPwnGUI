@@ -69,7 +69,7 @@ class App(tk.CTk):
         self.optionmenu_1.grid(row=2, column=0, padx=20, pady=20, sticky="ew")
 
         self.optionmenu_2 = tk.CTkOptionMenu(self, dynamic_resizing=True,
-                                                        values=["900", "950", "1000", "1050", "1100"])
+                                                        values=["900", "903", "950", "1000", "1001", "1050", "1070" "1100"])
         self.optionmenu_2.set("choose firmware")
         self.optionmenu_2.grid(row=2, column=1, padx=20, pady=20, sticky="ew")
 
