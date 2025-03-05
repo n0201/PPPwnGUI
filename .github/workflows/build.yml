@@ -46,7 +46,7 @@ jobs:
           zip -r "dist/release.zip" dist/*
 
       - name: Archive prebuilt binaries
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: prebuilt-binaries
           path: dist/*.zip
